@@ -32,7 +32,7 @@ def save_results(image, mask, y_pred, save_image_path):
     y_pred = np.concatenate([y_pred, y_pred, y_pred], axis=-1)
     y_pred = y_pred * 255
 
-    line = np.ones((H, 10, 3)) * 255
+    line = np.ones((H, 10, 3)) * 255 
 
     cat_images = np.concatenate([image, line, mask, line, y_pred], axis=1)
     cv2.imwrite(save_image_path, cat_images)
