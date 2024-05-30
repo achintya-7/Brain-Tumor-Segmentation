@@ -10,7 +10,6 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, ReduceLROnPlateau, EarlyStopping, TensorBoard
 from tensorflow.keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
-from unet import build_unet
 from metrics import dice_loss, dice_coef
 
 """ Global parameters """
@@ -26,6 +25,8 @@ def load_dataset(path, split=0.2):
     masks = sorted(glob(os.path.join(path, "masks", "*.png")))
 
     split_size = int(len(images) * split)
+
+    print(f"Total examples: {len(images)}, Total masks: {len(masks)}")
 
     train_x, valid_x = train_test_split(images, test_size=split_size, random_state=42)
     train_y, valid_y = train_test_split(masks, test_size=split_size, random_state=42)
